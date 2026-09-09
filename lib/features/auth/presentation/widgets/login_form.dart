@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_task_manger/core/theme/app_spacings.dart';
 import 'package:smart_task_manger/core/theme/pp_validators.dart';
+import 'package:smart_task_manger/features/auth/presentation/provider/auth_provider.dart';
 import 'package:smart_task_manger/widgets/app_button.dart';
 import 'package:smart_task_manger/widgets/app_text_field.dart';
 
@@ -34,11 +35,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       return;
     }
 
-    final email = _emailController.text.trim();
-    final password = _passwordController.text;
-
-    // TODO: Call the login ViewModel.
-    debugPrint('Login: $email / $password');
+    ref.read(authProvider.notifier).login(
+      email: _emailController.text.trim(),
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -87,9 +87,15 @@ class _LoginFormState extends ConsumerState<LoginForm> {
 
           const SizedBox(height: AppSpacing.sm),
 
-          AppButton(
-            label: 'Login',
-            onPressed: _login,
+          Consumer(
+            builder: (context, ref, child) {
+              final authState = ref.watch(authProvider);
+              return AppButton(
+                isLoading: authState.isLoading,
+                label: 'Login',
+                onPressed: authState.isLoading ? null : _login,
+              );
+            }
           ),
         ],
       ),
