@@ -137,6 +137,7 @@ abstract final class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
         ),
+        textStyle: AppTypography.textTheme.labelLarge,
         elevation: 0,
       ),
     );
