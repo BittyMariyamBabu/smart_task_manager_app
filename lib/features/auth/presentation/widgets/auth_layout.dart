@@ -4,7 +4,7 @@ import 'package:smart_task_manger/core/theme/app_spacings.dart';
 /// Provides the common layout used by authentication screens. 
 /// 
 /// Handles safe areas, scrolling, keyboard dismissal, responsive width 
-/// constraints, and form layout.
+/// constraints.
 ///
 /// Authentication pages such as [LoginPage] and [RegisterPage] provide 
 /// their form content through the [child] parameter while sharing the 
@@ -12,12 +12,8 @@ import 'package:smart_task_manger/core/theme/app_spacings.dart';
 class AuthLayout extends StatelessWidget {
   const AuthLayout({
     required this.child,
-    required this.formKey,
     super.key,
   });
-
-  /// The form key used to validate and manage the authentication form.
-  final GlobalKey<FormState> formKey;
 
   /// The authentication form content displayed inside the layout.
   final Widget child;
@@ -46,10 +42,7 @@ class AuthLayout extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                       vertical: AppSpacing.xl,
                     ),
-                    child: Form(
-                      key: formKey,
-                      child: child,
-                    ),
+                    child: child,
                   ),
                 ),
               ),

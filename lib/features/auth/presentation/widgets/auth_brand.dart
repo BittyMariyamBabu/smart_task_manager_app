@@ -4,7 +4,6 @@ import 'package:smart_task_manger/core/theme/app_radius.dart';
 import 'package:smart_task_manger/core/theme/app_spacings.dart';
 import 'package:smart_task_manger/core/theme/app_typography.dart';
 
-
 /// A reusable branding widget for authentication screens.
 /// 
 /// Displays an icon, title, and subtitle, typically used at the top of login or registration pages.
