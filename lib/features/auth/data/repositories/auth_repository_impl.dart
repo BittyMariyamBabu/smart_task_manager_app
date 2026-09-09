@@ -1,27 +1,32 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smart_task_manger/core/errors/app_exception.dart';
+import 'package:smart_task_manger/core/errors/firebase_errors.dart';
+import 'package:smart_task_manger/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:smart_task_manger/features/auth/domain/repositories/auth_repository.dart';
 
-import '../datasources/auth_remote_data_source.dart';
-import '../../domain/repositories/auth_repository.dart';
-
-/// Firebase-based implementation of [AuthRepository].
+/// Firebase implementation of [AuthRepository].
 ///
-/// This class connects the domain repository contract with the
-/// [AuthRemoteDataSource], which handles communication with Firebase.
+/// Handles authentication through [AuthRemoteDataSource].
 class AuthRepositoryImpl implements AuthRepository {
-  /// Creates an [AuthRepositoryImpl] with the given remote data source.
   AuthRepositoryImpl(this._remoteDataSource);
 
   final AuthRemoteDataSource _remoteDataSource;
 
-  /// Signs in the user through the remote data source.
+  /// Signs in a user with email and password.
+  ///
+  /// Converts [FirebaseAuthException] into an [AppException].
   @override
   Future<UserCredential> login({
     required String email,
     required String password,
-  }) {
-    return _remoteDataSource.login(
-      email: email,
-      password: password,
-    );
+  }) async {
+    try {
+      return await _remoteDataSource.login(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      throw AppException(mapFirebaseAuthError(e));
+    }
   }
 }
