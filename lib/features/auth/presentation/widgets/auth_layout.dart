@@ -29,8 +29,8 @@ class AuthLayout extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              keyboardDismissBehavior:
-                  ScrollViewKeyboardDismissBehavior.onDrag,
+              // used to automatically hide the keyboard when the user starts scrolling.
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.lg,
               ),

@@ -23,7 +23,7 @@ class AuthHeader extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [      
+      children: [    
         Text(title, style: theme.textTheme.headlineLarge),
         const SizedBox(height: AppSpacing.sm),
         Text(
@@ -32,6 +32,7 @@ class AuthHeader extends StatelessWidget {
             color: colors.onSurfaceVariant,
           ),
         ),
+        const SizedBox(height: AppSpacing.xl),  
       ],
     );
   }
