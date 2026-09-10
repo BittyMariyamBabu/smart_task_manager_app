@@ -29,4 +29,41 @@ class AuthRepositoryImpl implements AuthRepository {
       throw AppException(mapFirebaseAuthError(e));
     }
   }
+
+  /// Signs up a user with email and password.
+  ///
+  /// Converts [FirebaseAuthException] into an [AppException].
+  @override
+  Future<UserCredential> signup({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      return await _remoteDataSource.signUp(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      throw AppException(mapFirebaseAuthError(e));
+    }
+  }
+
+  /// Signs out the currently authenticated user.
+  @override
+  Future<void> logout() async {
+    try {
+      await _remoteDataSource.logout();
+    } on FirebaseAuthException catch (e) {
+      throw AppException(mapFirebaseAuthError(e));
+    }
+  }
+
+  /// Returns the currently authenticated user, if any.
+  @override
+  User? get currentUser => _remoteDataSource.currentUser;
+
+  /// Emits authentication state changes.
+  @override
+  Stream<User?> get authStateChanges =>
+      _remoteDataSource.authStateChanges;
 }

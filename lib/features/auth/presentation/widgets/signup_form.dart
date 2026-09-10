@@ -40,10 +40,10 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
       return;
     }
 
-    // ref.read(authProvider.notifier).login(
-    //   email: _emailController.text.trim(),
-    //   password: _passwordController.text,
-    // );
+    ref.read(authProvider.notifier).signUp(
+      email: _emailController.text.trim(),
+      password: _passwordController.text,
+    );
   }
 
   @override

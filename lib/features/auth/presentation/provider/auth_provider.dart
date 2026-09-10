@@ -23,6 +23,12 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
   );
 });
 
+/// Provides the current Firebase authentication state.
+final authStateProvider = StreamProvider<User?>((ref) {
+  final repository = ref.read(authRepositoryProvider);
+  return repository.authStateChanges;
+});
+
 /// Manages authentication state and actions.
 final authProvider = NotifierProvider<AuthNotifier, AsyncValue<User?>>(
   AuthNotifier.new,
@@ -55,4 +61,42 @@ class AuthNotifier extends Notifier<AsyncValue<User?>> {
       state = AsyncError(e, stackTrace);
     }
   }
+
+  /// Signs up a user with email and password.
+  Future<void> signUp({
+    required String email,
+    required String password,
+  }) async {
+    state = const AsyncLoading();
+
+    try {
+      final credential = await _repository.signup(
+        email: email,
+        password: password,
+      );
+
+      state = AsyncData(credential.user);
+    } catch (e, stackTrace) {
+      state = AsyncError(e, stackTrace);
+    }
+  }
+
+  /// Signs out the currently authenticated user.
+  Future<void> logOut({
+    required String email,
+    required String password,
+  }) async {
+    state = const AsyncLoading();
+
+    try {
+      await _repository.logout();
+
+      state = AsyncData(null);
+    } catch (e, stackTrace) {
+      state = AsyncError(e, stackTrace);
+    }
+  }
+
+  /// Returns the currently authenticated user.
+  User? get currentUser => _repository.currentUser;
 }
