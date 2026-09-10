@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:smart_task_manger/core/theme/app_spacings.dart';
-import 'package:smart_task_manger/features/auth/presentation/pages/signup_page.dart';
+import 'package:smart_task_manger/features/auth/presentation/pages/login_page.dart';
 import 'package:smart_task_manger/features/auth/presentation/widgets/auth_brand.dart';
 import 'package:smart_task_manger/features/auth/presentation/widgets/auth_footer.dart';
 import 'package:smart_task_manger/features/auth/presentation/widgets/auth_header.dart';
 import 'package:smart_task_manger/features/auth/presentation/widgets/auth_layout.dart';
-import 'package:smart_task_manger/features/auth/presentation/widgets/login_form.dart';
+import 'package:smart_task_manger/features/auth/presentation/widgets/signup_form.dart';
 
-/// Displays the login form and handles user authentication.
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+/// Displays the sign up form and handles user authentication.
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +17,18 @@ class LoginPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: AppSpacing.xxl),
+          const SizedBox(height: AppSpacing.md),
 
           const AuthBrand(),
 
-          const SizedBox(height: AppSpacing.xxl),
+          const SizedBox(height: AppSpacing.md),
 
           const AuthHeader(
-            title: 'Welcome back',
-            subtitle: 'Sign in to continue managing your tasks.',
+            title: 'Create an account',
+            subtitle: 'Sign up to get started with the Smart Task Manager.',
           ),
 
-          const LoginForm(),
+          const SignUpForm(),
 
           const SizedBox(height: AppSpacing.xl),
 
@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
             onPressed: () => () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const SignUpPage(),
+                builder: (context) => const LoginPage(),
               ),
             ),
           ),
