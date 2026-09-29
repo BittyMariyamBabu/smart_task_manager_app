@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_task_manger/core/theme/app_spacings.dart';
-import 'package:smart_task_manger/core/theme/pp_validators.dart';
+import 'package:smart_task_manger/core/utils/app_validators.dart';
 import 'package:smart_task_manger/features/auth/presentation/provider/auth_provider.dart';
 import 'package:smart_task_manger/widgets/app_button.dart';
 import 'package:smart_task_manger/widgets/app_text_field.dart';
