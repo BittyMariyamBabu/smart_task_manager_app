@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_task_manger/core/router/app_router.dart';
 import 'package:smart_task_manger/core/theme/app_theme.dart';
@@ -9,13 +10,17 @@ Future<void> main() async {
   // Ensure Flutter bindings are initialized before app initialization.
   WidgetsFlutterBinding.ensureInitialized();
   
+  // Intialize the .env file
+  await dotenv.load(fileName: ".env");
+  
   // Initialize Firebase before using Firebase services
   // and uses the configuration for the current platform
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
-    runApp(
-      ProviderScope(
+
+  runApp(
+    ProviderScope(
       child: const MyApp()
     )
   );
